@@ -7,9 +7,7 @@
 # Setup -------------------------------------------------------------------
 
 library(tidyverse)
-library(dplyr)
 library(e1071)
-library(dplyr)
 
 # mean, median, variance and standard deviation? ---------------------------
 
@@ -34,9 +32,6 @@ r_data %>%
 # calculating median manually
 #subset data set (n+1)/2
 # use slice() function to select specific row of data
-
-r_data$dat[dat(length(r_data$dat))] 
-
 
 # we need to order (arrange) data before calculating median manually
 # using tidy
@@ -103,7 +98,7 @@ sa_time <- sa_time %>%
 
 #creating long data
 sa_long <- sa_time %>% 
-  gather(key = "time_type", value = "minutes", -human)
+  gather(key = "time_type", value = "minutes", -human, -geo)
 
 sa_count <- sa_long %>% 
   count(time_type) %>% 
@@ -201,20 +196,5 @@ ggplot(data = sa_time, aes(y = now_now, x = just_now)) +
   geom_smooth(aes(colour = geo), method = "lm") +
   coord_equal(xlim = c(0,60), ylim = c(0,60))
 # grey areas represent variance around data
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
