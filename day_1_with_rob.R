@@ -7,7 +7,7 @@
 # Setup -------------------------------------------------------------------
 
 library(tidyverse)
-library(dplyr)
+
 
 # Integers ----------------------------------------------------------------
 
@@ -82,9 +82,10 @@ summary(chicks_nest)
 
 # Viewing data ------------------------------------------------------------
 
-head(sexy_chicks, 5)
+# RWS: You can't call the chicks dataframe if you haven't created it yet
+head(ChickWeight, 5)
 # choosing specific values from a column of a particular dataset
-sexy_chicks[c(1, 54, 61, 12), 2]
+ChickWeight[c(1, 54, 61, 12), 2]
 
 # Descriptive statistics --------------------------------------------------
 
@@ -153,7 +154,8 @@ wt_summary <- chicks %>%
             wt_quart2 = quantile(weight, 0.50), 
             wt_quart3 = quantile(weight, 0.75))
 
-
+# visualise
+wt_summary
 
 
 
