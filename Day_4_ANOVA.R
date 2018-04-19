@@ -7,7 +7,6 @@
 # Setup -------------------------------------------------------------------
 
 library(tidyverse)
-library(ggplot2)
 library(ggpubr)
 
 
@@ -67,6 +66,7 @@ ggplot(data = chicks_tukey) +
   coord_flip() +
   labs(y = "Difference in mean levels of diet", x = "Diet pairs") +
   geom_hline(aes(yintercept = 0), linetype = "dashed")
+# RWS: Nice!
 
 plot(TukeyHSD(aov(weight ~ Diet, data = chicks_21)))
 
@@ -81,7 +81,7 @@ chicks_0_21 <- ChickWeight %>%
   filter(Time %in% c(0, 2, 21)) # %in% allows R to discared all other times and only use 0,2, and 21
 
 # visualising data
-ggplot(data = chicks_0_21, aes(x = Time, y = weight)) +
+ggplot(data = chicks_0_21, aes(x = as.factor(Time), y = weight)) +
   geom_boxplot(notch = T, aes(fill = as.factor(Time))) #as.factor makes a continuous variable into a category
 
 #Run an ANOVA
