@@ -197,11 +197,12 @@ wolfgang <- data.frame(fang_length = c(rnorm(n = 201, mean = 12, sd = 5),
 hist(wolfgang$fang_length)
 
 # visualising dataset using a box plot
-ggplot(data = wolfgang, aes(x = species, y = fang_length, fill = species)) +
-  geom_boxplot(position = "dodge") +
-  labs(y = "Species", x = "Fang length (cm)") +
-  theme(axis.text.y = element_blank(),
-        axis.ticks.y = element_blank())
+ggplot(data = wolfgang, aes(y = fang_length, x = species, fill = species)) +
+  geom_boxplot() +
+  coord_flip() +
+  labs(x = "", y = "Fang length (cm)") 
+# theme(axis.text.y = element_blank(),
+#       axis.ticks.y = element_blank())
 
 # testing normality of dataset
 shapiro.test(wolfgang$fang_length)
@@ -221,6 +222,7 @@ t.test(fang_length ~ species, data = wolfgang, var.equal = TRUE)
 
 # now we want to know if sample A is less than sample B
 t.test(fang_length ~ species, data = wolfgang, var.equal = TRUE, alternative = "less")
+# 
 
 # now what if we want to know if sample A is bigger
 t.test(fang_length ~ species, data = wolfgang, var.equal = TRUE, alternative = "greater")
