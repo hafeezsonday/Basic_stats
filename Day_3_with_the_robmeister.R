@@ -177,8 +177,9 @@ library(ggpubr)
 library(ggplot2)
 
 # I hypothesise that, pure bred wolves have bigger fangs (cm) than cross bred wolves (werewolves).
-# H0: Werewolves do have bigger fangs than wolves.
-# H1: Werewolves do not have bigger fangs than wolves.
+# H0: Wolves do not have longer fangs than werewolves.
+# H1: Wolves do have longer fangs than werewolves.
+# RWS: Be careful with how you state your hypothesis
 
 # creating data -----------------------------------------------------------
 
@@ -204,30 +205,26 @@ ggplot(data = wolfgang, aes(y = fang_length, x = species, fill = species)) +
 # theme(axis.text.y = element_blank(),
 #       axis.ticks.y = element_blank())
 
-# testing normality of dataset
-shapiro.test(wolfgang$fang_length)
-# p value = 3.024e-11 (sig diff)
-
-wolfgang %>% 
-  group_by(species) %>% 
-  summarise(r_norm_dist = as.numeric(shapiro.test(fang_length)[2]))
-
+# testing assumptions
+# RWS: This one chunk tests all of the assumptions
 wolfgang %>% 
   group_by(species) %>% 
   summarise(r_norm_dist = as.numeric(shapiro.test(fang_length)[2]),
             r_norm_var = var(fang_length))
 
 # run a basic test
-t.test(fang_length ~ species, data = wolfgang, var.equal = TRUE)
+t.test(fang_length ~ species, data = wolfgang, var.equal = FALSE)
 
 # now we want to know if sample A is less than sample B
-t.test(fang_length ~ species, data = wolfgang, var.equal = TRUE, alternative = "less")
+t.test(fang_length ~ species, data = wolfgang, var.equal = FALSE, alternative = "less")
 # 
 
 # now what if we want to know if sample A is bigger
-t.test(fang_length ~ species, data = wolfgang, var.equal = TRUE, alternative = "greater")
+t.test(fang_length ~ species, data = wolfgang, var.equal = FALSE, alternative = "greater")
 
 # basic t-test reflects a p value of 2.2e-16 (p < 0.05),
 # therefore we accpt H1. however t-test for "less" and "greater" indicates a p value of 1 
 # not quite sure what to make of that.
+# RWS: The p-value of 1 for the "greater" than test means that werewolf fangs are not 
+# significantly greater than wolf fangs
 
