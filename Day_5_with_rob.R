@@ -6,8 +6,7 @@
 # Setup -------------------------------------------------------------------
 
 library(tidyverse)
-library(dplyr)
-library(Rmisc)
+# library(Rmisc) # Unfortunately this overrides many dplyr functions
 library(ggpubr)
 
 # Load data ---------------------------------------------------------------
@@ -41,7 +40,7 @@ View(snakes_summary)
 # Test hypothesis ---------------------------------------------------------
 
 # first calculate SE and CI
-snakes_summary2 <- summarySE(data = snakes,
+snakes_summary2 <- Rmisc::summarySE(data = snakes,
                              measurevar = "openings",
                              groupvars = c("day"))
 View(snakes_summary2)
@@ -119,7 +118,7 @@ moth_summary <- moths %>%
            
 View(moth_summary)
 
-moth_summarySE <- summarySE(data = moths, 
+moth_summarySE <- Rmisc::summarySE(data = moths, 
                             measurevar = "count", 
                             groupvars = "Location")
 View(moth_summarySE)  
@@ -251,9 +250,6 @@ corrplot(ecklonia_pearson, method = "circle")
 
 library(ggplot2)
 library(ggpubr)
-library(dplyr)
-
-
 library(reshape2)
 melted_ecklonia <- melt(ecklonia_pearson)
 
