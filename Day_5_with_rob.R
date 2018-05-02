@@ -245,7 +245,7 @@ cor.test(ecklonia$primary_blade_length, ecklonia$primary_blade_width, method = "
 ecklonia_pearson <- cor(ecklonia_sub)
 ecklonia_pearson
 corrplot(ecklonia_pearson, method = "circle")
-
+View(ecklonia_pearson)
 
 # Heatmap -----------------------------------------------------------------
 
